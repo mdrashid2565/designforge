@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MCP_PORT=4000
+      - STORAGE_DRIVER=local
+    volumes:
+      - designforge-data:/home/user/designforge/data
+    restart: unless-stopped
+
+volumes:
+  designforge-data:

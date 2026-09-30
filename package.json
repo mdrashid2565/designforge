@@ -1,0 +1,28 @@
+{
+  "name": "designforge-monorepo",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "DesignForge: Production-grade design platform with Canva capabilities and first-class AI-agent MCP control layer",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=designforge-web",
+    "dev:mcp": "node packages/mcp-server/dist/server.js",
+    "build:core": "npm run build --workspace=@designforge/core",
+    "build:packages": "npm run build --workspace=@designforge/core && npm run build --workspace=@designforge/ai-adapter && npm run build --workspace=@designforge/mcp-server && npm run build --workspace=@designforge/browser-agent",
+    "build": "npm run build:packages && npm run build --workspace=designforge-web",
+    "test": "npm run test:core && npm run test:ai && npm run test:mcp && npm run test:agent && npm run test:e2e",
+    "test:core": "npm run test --workspace=@designforge/core",
+    "test:ai": "npm run test --workspace=@designforge/ai-adapter",
+    "test:mcp": "npm run test --workspace=@designforge/mcp-server",
+    "test:agent": "npm run test --workspace=@designforge/browser-agent",
+    "test:e2e": "node scripts/run-e2e-suite.js",
+    "demo:instagram": "node scripts/demo-instagram-post.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

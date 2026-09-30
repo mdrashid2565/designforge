@@ -1,0 +1,108 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DesignForge API & MCP Engine",
+    "version": "1.0.0",
+    "description": "Production-grade design platform API with Canva capabilities and first-class Model Context Protocol (MCP) agent control layer."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Frontend & Next.js API Server"
+    },
+    {
+      "url": "http://localhost:4000",
+      "description": "Standalone MCP & Realtime SSE Server"
+    }
+  ],
+  "paths": {
+    "/api/designs": {
+      "get": {
+        "summary": "List all designs",
+        "responses": {
+          "200": {
+            "description": "Array of designs in current workspace"
+          }
+        }
+      }
+    },
+    "/api/designs/{id}": {
+      "get": {
+        "summary": "Get full scene graph by design ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Design scene graph object" },
+          "404": { "description": "Design not found" }
+        }
+      }
+    },
+    "/api/tools/{toolName}": {
+      "post": {
+        "summary": "Direct execution of any MCP tool",
+        "parameters": [
+          {
+            "name": "toolName",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Tool execution result" }
+        }
+      }
+    },
+    "/api/ai/magic-design": {
+      "post": {
+        "summary": "Synthesize complete design from prompt and brand kit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "prompt": { "type": "string" },
+                  "dimensions": { "type": "object" },
+                  "language": { "type": "string" }
+                },
+                "required": ["prompt"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Generated design scene graph" }
+        }
+      }
+    },
+    "/api/export": {
+      "get": {
+        "summary": "Export design as SVG, JSON, PNG, or PDF",
+        "parameters": [
+          { "name": "id", "in": "query", "required": true, "schema": { "type": "string" } },
+          { "name": "format", "in": "query", "schema": { "type": "string", "enum": ["svg", "json", "png", "pdf"] } },
+          { "name": "page", "in": "query", "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Exported file buffer/string" }
+        }
+      }
+    }
+  }
+}

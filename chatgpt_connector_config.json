@@ -1,0 +1,12 @@
+{
+  "name": "DesignForge Autonomous Canvas Engine",
+  "version": "1.0.0",
+  "description": "Full vector canvas and design generation protocol for ChatGPT",
+  "authentication": {
+    "type": "none"
+  },
+  "endpoints": {
+    "sse": "http://localhost:4000/sse",
+    "rpc": "http://localhost:4000/api/tools"
+  }
+}

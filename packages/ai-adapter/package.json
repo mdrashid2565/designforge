@@ -1,0 +1,19 @@
+{
+  "name": "@designforge/ai-adapter",
+  "version": "1.0.0",
+  "description": "DesignForge Universal Provider-Agnostic AI Adapter Layer",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/index.test.js"
+  },
+  "dependencies": {
+    "@designforge/core": "^1.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.4.5"
+  }
+}

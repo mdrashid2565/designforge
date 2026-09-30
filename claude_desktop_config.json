@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "designforge": {
+      "command": "node",
+      "args": [
+        "/home/user/designforge/packages/mcp-server/dist/cli.js"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
